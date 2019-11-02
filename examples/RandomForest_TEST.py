@@ -5,14 +5,18 @@
 @ Update Date:    2019-07-10 
 @ Description:    Implement RandomForest_TEST
 """
+import time,sys,os
+# LIB is the parent directory of the directory where program resides.
+LIB = os.path.join(os.path.dirname(__file__), '..')
+DAT = os.path.join(os.path.dirname(__file__), '..', 'dataset', 'dataset1')
+sys.path.insert(0, LIB)
 from RandomForest import RandomForestClassifier, RandomForestRegression
 import numpy as np
 import pandas as pd
-import time
 from DecisionTree import *
 
-trainData = pd.read_table('../dataset/dataset1/train.txt', header=None, encoding='gb2312', delim_whitespace=True)
-testData = pd.read_table('../dataset/dataset1/test.txt', header=None, encoding='gb2312', delim_whitespace=True)
+trainData = np.array(pd.read_table(os.path.join(DAT,'train.txt'), header=None, encoding='gb2312', delim_whitespace=True))
+testData = np.array(pd.read_table(os.path.join(DAT,'test.txt'), header=None, encoding='gb2312', delim_whitespace=True))
 trainLabel = np.array(trainData.pop(3))
 trainData = np.array(trainData)
 testLabel = np.array(testData.pop(3))

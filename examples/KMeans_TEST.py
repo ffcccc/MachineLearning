@@ -5,14 +5,18 @@
 @ Update Date:    2019-05-28
 @ Description:    Implement KMeans_TEST
 """
+import time,sys,os
+# LIB is the parent directory of the directory where program resides.
+LIB = os.path.join(os.path.dirname(__file__), '..')
+DAT = os.path.join(os.path.dirname(__file__), '..', 'dataset', 'dataset6')
+sys.path.insert(0, LIB)
 import matplotlib.pyplot as plt
 from Cluster import KMeans as kmeans
 from sklearn.cluster import KMeans
 import numpy as np
 import pandas as pd
-import time
 
-trainData = pd.read_table('../dataset/dataset6/train.txt',header=None,encoding='gb2312', delim_whitespace=True)
+trainData = np.array(pd.read_table(os.path.join(DAT,'train.txt'), header=None, encoding='gb2312', delim_whitespace=True))
 trainData = np.array(trainData)
 
 time_start1 = time.time()

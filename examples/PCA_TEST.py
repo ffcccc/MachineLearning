@@ -5,16 +5,19 @@
 @ Update Date:    2019-06-06 
 @ Description:    Implement PCA_TEST
 """
-
+import time,sys,os
+# LIB is the parent directory of the directory where program resides.
+LIB = os.path.join(os.path.dirname(__file__), '..')
+DAT = os.path.join(os.path.dirname(__file__), '..', 'dataset', 'dataset1')
+sys.path.insert(0, LIB)
 from DimensionReduction import PCA
 from sklearn.decomposition import PCA as pca
 import numpy as np
-import time
 from sklearn.linear_model import LogisticRegression
 import pandas as pd
 
-trainData = np.array(pd.read_table('../dataset/dataset1/train.txt', header=None, encoding='gb2312', delim_whitespace=True))
-testData = np.array(pd.read_table('../dataset/dataset1/test.txt', header=None, encoding='gb2312', delim_whitespace=True))
+trainData = np.array(pd.read_table(os.path.join(DAT,'train.txt'), header=None, encoding='gb2312', delim_whitespace=True))
+testData = np.array(pd.read_table(os.path.join(DAT,'test.txt'), header=None, encoding='gb2312', delim_whitespace=True))
 train_y = trainData[:, -1]
 train_x = np.delete(trainData, -1, axis=1)
 test_y = testData[:, -1]

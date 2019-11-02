@@ -8,6 +8,7 @@
 
 import numpy as np
 import operator as op
+import preProcess
 
 class KNNClassifier:
     def __init__(self, k, norm_type="Normalization"):
@@ -23,15 +24,15 @@ class KNNClassifier:
     Input:  data        dataType: ndarray   description: input data
     Output: norm_data   dataType: ndarray   description: output data after normalization
     '''
-    def Normalization(self, data):
-        # get the max and min value of each column
-        min_value = data.min(axis=0)
-        max_value = data.max(axis=0)
-        diff = max_value - min_value
-        # normalization
-        min_data = np.tile(min_value, (data.shape[0], 1))
-        norm_data = (data - min_data)/np.tile(diff, (data.shape[0], 1))
-        return norm_data
+    # def Normalization(self, data):
+    #     # get the max and min value of each column
+    #     min_value = data.min(axis=0)
+    #     max_value = data.max(axis=0)
+    #     diff = max_value - min_value
+    #     # normalization
+    #     min_data = np.tile(min_value, (data.shape[0], 1))
+    #     norm_data = (data - min_data)/np.tile(diff, (data.shape[0], 1))
+    #     return norm_data
 
     '''
     Function:  Standardization
@@ -40,12 +41,12 @@ class KNNClassifier:
     Input:  data            dataType: ndarray   description: input data
     Output: standard_data   dataType: ndarray   description: output data after standardization
     '''
-    def Standardization(self, data):
-        # get the mean and the variance of each column
-        mean_value = data.mean(axis=0)
-        var_value = data.std(axis=0)
-        standard_data = (data - np.tile(mean_value, (data.shape[0], 1)))/np.tile(var_value, (data.shape[0], 1))
-        return standard_data
+    # def Standardization(self, data):
+    #     # get the mean and the variance of each column
+    #     mean_value = data.mean(axis=0)
+    #     var_value = data.std(axis=0)
+    #     standard_data = (data - np.tile(mean_value, (data.shape[0], 1)))/np.tile(var_value, (data.shape[0], 1))
+    #     return standard_data
 
     '''
     Function:  train
@@ -56,9 +57,9 @@ class KNNClassifier:
     '''
     def train(self, train_data, train_label):
         if self.norm_type == "Standardization":
-            train_data = self.Standardization(train_data)
+            train_data = preProcess.Standardization(train_data)
         else:
-            train_data = self.Normalization(train_data)
+            train_data = preProcess.Normalization(train_data)
         self.x_train = train_data
         self.y_train = train_label
         return self
@@ -76,9 +77,9 @@ class KNNClassifier:
     def predict(self, test_data):
         # Normalization
         if self.norm_type == "Standardization":
-            testData = self.Standardization(test_data)
+            testData = preProcess.Standardization(test_data)
         else:
-            testData = self.Normalization(test_data)
+            testData = preProcess.Normalization(test_data)
 
         test_num = testData.shape[0]
         prediction = np.zeros([test_num, 1])

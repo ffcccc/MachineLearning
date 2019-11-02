@@ -1,11 +1,15 @@
-from AdaBoost import *
-from SVM import *
 import numpy as np
 import pandas as pd
-import time
+import time,sys,os
+# LIB is the parent directory of the directory where program resides.
+LIB = os.path.join(os.path.dirname(__file__), '..')
+DAT = os.path.join(os.path.dirname(__file__), '..', 'dataset', 'dataset2')
+sys.path.insert(0, LIB)
+from AdaBoost import *
+from SVM import *
 
-trainData = np.array(pd.read_table('../dataset/dataset2/train.txt', header=None, encoding='gb2312', delim_whitespace=True))
-testData = np.array(pd.read_table('../dataset/dataset2/test.txt', header=None, encoding='gb2312', delim_whitespace=True))
+trainData = np.array(pd.read_table(os.path.join(DAT,'train.txt'), header=None, encoding='gb2312', delim_whitespace=True))
+testData = np.array(pd.read_table(os.path.join(DAT,'test.txt'), header=None, encoding='gb2312', delim_whitespace=True))
 trainLabel = trainData[:, -1]
 trainData = np.delete(trainData, -1, axis=1)
 testLabel = testData[:, -1]

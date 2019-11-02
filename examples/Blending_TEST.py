@@ -5,16 +5,19 @@
 @ Update Date:    2019-05-04
 @ Description:    Test Blending
 """
-
+import time,sys,os
+# LIB is the parent directory of the directory where program resides.
+LIB = os.path.join(os.path.dirname(__file__), '..')
+DAT = os.path.join(os.path.dirname(__file__), '..', 'dataset', 'dataset3')
+sys.path.insert(0, LIB)
 from Blending import *
 from Perceptron import *
 from LogisticRegression import *
 import numpy as np
 import pandas as pd
-import time
 
-trainData = np.array(pd.read_table('../dataset/dataset3/train.txt', header=None, encoding='gb2312', delim_whitespace=True))
-testData = np.array(pd.read_table('../dataset/dataset3/test.txt', header=None, encoding='gb2312', delim_whitespace=True))
+trainData = np.array(pd.read_table(os.path.join(DAT,'train.txt'), header=None, encoding='gb2312', delim_whitespace=True))
+testData = np.array(pd.read_table(os.path.join(DAT,'test.txt'), header=None, encoding='gb2312', delim_whitespace=True))
 trainLabel = trainData[:, -1]
 trainData = np.delete(trainData, -1, axis=1)
 testLabel = testData[:, -1]
