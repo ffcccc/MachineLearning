@@ -8,7 +8,7 @@
 import time,sys,os
 # LIB is the parent directory of the directory where program resides.
 LIB = os.path.join(os.path.dirname(__file__), '..')
-DAT = os.path.join(os.path.dirname(__file__), '..', 'dataset', 'dataset6')
+DAT = os.path.join(os.path.dirname(__file__), '..', 'dataset', 'dataset1')
 sys.path.insert(0, LIB)
 import matplotlib.pyplot as plt
 from Cluster import KMeans as kmeans

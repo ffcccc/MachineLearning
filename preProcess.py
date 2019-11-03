@@ -1,4 +1,5 @@
 import numpy as np
+import sys
 
 '''
 Function:  Normalization
@@ -32,3 +33,52 @@ def Standardization(data):
     varValue = data.std(axis=0)
     standarddata = (data - np.tile(meanValue, (data.shape[0], 1))) / np.tile(varValue, (data.shape[0], 1))
     return standarddata
+
+'''
+Function:  calcuateDistance
+Description: calcuate the distance between input vector and train data
+Input:  x1      dataType: ndarray   description: input vector
+        x2      dataType: ndarray   description: input vector
+Output: d       dataType: float     description: distance between input vectors
+'''
+def calculateDistance(distance_type, x1, x2):
+    if distance_type == "Euclidean":
+        d = np.sqrt(np.sum(np.power(x1 - x2, 2), axis=1))
+    elif distance_type == "Cosine":
+        d = np.dot(x1, x2)/(np.linalg.norm(x1)*np.linalg.norm(x2))
+    elif distance_type == "Manhattan":
+        d = np.sum(x1 - x2)
+    else:
+        print("Error Type!")
+        sys.exit()
+    return d
+
+'''
+Function:  calcuateDistance
+Description: calcuate the distance between input vector and train data
+Input:  input       dataType: ndarray   description: input vector
+        traind_ata  dataType: ndarray   description: data for training
+        train_label dataType: ndarray   description: labels of train data
+        k           dataType: int       description: select the first k distances
+Output: prob        dataType: float     description: max probability of prediction 
+        label       dataType: int       description: prediction label of input vector
+'''
+def calcuateDistance(input, train_data, train_label, k):
+    train_num = train_data.shape[0]
+    # calcuate the distances
+    distances = np.tile(input, (train_num, 1)) - train_data
+    distances = distances**2
+    distances = distances.sum(axis=1)
+    distances = distances**0.5
+
+    # get the labels of the first k distances
+    disIndex = distances.argsort()
+    labelCount = {}
+    for i in range(k):
+        label = train_label[disIndex[i]]
+        labelCount[label] = labelCount.get(label, 0) + 1
+
+    prediction = sorted(labelCount.items(), key=op.itemgetter(1), reverse=True)
+    label = prediction[0][0]
+    prob = prediction[0][1]/k
+    return label, prob

@@ -22,25 +22,25 @@ class KMeans:
         self.centers = None               # cluster centers
         self.distances = None             # distance between sample and cluster
 
-    '''
-      Function:  calcuateDistance
-      Description: calcuate the distance between input vector and train data
-      Input:  x1      dataType: ndarray   description: input vector
-              x2      dataType: ndarray   description: input vector
-      Output: d       dataType: float     description: distance between input vectors
-      '''
-    def calculateDistance(self, x1, x2):
-        d = 0
-        if self.distance_type == "Euclidean":
-            d = np.sqrt(np.power(np.sum(x1 - x2, axis=1), 2))
-        elif self.distance_type == "Cosine":
-            d = np.dot(x1, x2)/(np.linalg.norm(x1)*np.linalg.norm(x2))
-        elif self.distance_type == "Manhattan":
-            d = np.sum(x1 - x2)
-        else:
-            print("Error Type!")
-            sys.exit()
-        return d
+    # '''
+    #   Function:  calcuateDistance
+    #   Description: calcuate the distance between input vector and train data
+    #   Input:  x1      dataType: ndarray   description: input vector
+    #           x2      dataType: ndarray   description: input vector
+    #   Output: d       dataType: float     description: distance between input vectors
+    #   '''
+    # def calculateDistance(self, x1, x2):
+    #     d = 0
+    #     if self.distance_type == "Euclidean":
+    #         d = np.sqrt(np.power(np.sum(x1 - x2, axis=1), 2))
+    #     elif self.distance_type == "Cosine":
+    #         d = np.dot(x1, x2)/(np.linalg.norm(x1)*np.linalg.norm(x2))
+    #     elif self.distance_type == "Manhattan":
+    #         d = np.sum(x1 - x2)
+    #     else:
+    #         print("Error Type!")
+    #         sys.exit()
+    #     return d
 
     '''
       Function:  createCenter
@@ -76,7 +76,8 @@ class KMeans:
             d = np.zeros([sample_num, len(centers)])
             for i in range(len(centers)):
                 # calculate the distance between each sample and each cluster center
-                d[:, i] = self.calculateDistance(train_data, centers[i])
+                # d[:, i] = self.calculateDistance(train_data, centers[i])
+                d[:, i] = preProcess.calculateDistance(self.distance_type, train_data, centers[i])
 
             # find the minimum distance between each sample and each cluster center
             old_label = distances[:, 0].copy()
@@ -119,7 +120,7 @@ class KMeans:
         centers = [initial_center]                                             # cluster list
 
         # clustering with the initial cluster center
-        distances[:, 1] = np.power(self.calculateDistance(train_data, initial_center), 2)
+        distances[:, 1] = np.power(preProcess.calculateDistance(self.distance_type, train_data, initial_center), 2)
 
         # generate cluster centers
         while len(centers) < self.k:
@@ -173,7 +174,7 @@ class KMeans:
             d = np.zeros([sample_num, len(centers)])
             for i in range(len(centers)):
                 # calculate the distance between each sample and each cluster center
-                d[:, i] = self.calculateDistance(train_data, centers[i])
+                d[:, i] = preProcess.calculateDistance(self.distance_type, train_data, centers[i])
 
             # find the minimum distance between each sample and each cluster center
             distances[:, 0] = np.argmin(d, axis=1)
@@ -282,25 +283,25 @@ class DBSCAN:
         self.label = None
         self.neighbor = None
 
-    '''
-      Function:  calcuateDistance
-      Description: calcuate the distance between input vector and train data
-      Input:  x1      dataType: ndarray   description: input vector
-              x2      dataType: ndarray   description: input vector
-      Output: d       dataType: float     description: distance between input vectors
-    '''
-    def calculateDistance(self, x1, x2):
-        if self.distance_type == "Euclidean":
-            d = np.sqrt(np.sum(np.power(x1 - x2, 2), axis=1))
-            #d = np.sqrt(np.sum(np.power(x1 - x2, 2)))
-        elif self.distance_type == "Cosine":
-            d = np.dot(x1, x2)/(np.linalg.norm(x1)*np.linalg.norm(x2))
-        elif self.distance_type == "Manhattan":
-            d = np.sum(x1 - x2)
-        else:
-            print("Error Type!")
-            sys.exit()
-        return d
+    # '''
+    #   Function:  calcuateDistance
+    #   Description: calcuate the distance between input vector and train data
+    #   Input:  x1      dataType: ndarray   description: input vector
+    #           x2      dataType: ndarray   description: input vector
+    #   Output: d       dataType: float     description: distance between input vectors
+    # '''
+    # def calculateDistance(self, x1, x2):
+    #     if self.distance_type == "Euclidean":
+    #         d = np.sqrt(np.sum(np.power(x1 - x2, 2), axis=1))
+    #         #d = np.sqrt(np.sum(np.power(x1 - x2, 2)))
+    #     elif self.distance_type == "Cosine":
+    #         d = np.dot(x1, x2)/(np.linalg.norm(x1)*np.linalg.norm(x2))
+    #     elif self.distance_type == "Manhattan":
+    #         d = np.sum(x1 - x2)
+    #     else:
+    #         print("Error Type!")
+    #         sys.exit()
+    #     return d
 
     '''
       Function:  train
@@ -365,7 +366,7 @@ class DBSCAN:
     def getCenters(self, train_data):
         neighbor = {}
         for i in range(len(train_data)):
-            distance = self.calculateDistance(train_data[i], train_data)
+            distance = preProcess.calculateDistance(self.distance_type, train_data[i], train_data)
             index = np.where(distance <= self.eps)[0]
             if len(index) > self.m:
                 neighbor[i] = index

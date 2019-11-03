@@ -86,39 +86,39 @@ class KNNClassifier:
         probability = np.zeros([test_num, 1])
         # predict each samples in test data
         for i in range(test_num):
-            prediction[i], probability[i] = self.calcuateDistance(testData[i], self.x_train, self.y_train, self.k)
+            prediction[i], probability[i] = preProcess.calcuateDistance(testData[i], self.x_train, self.y_train, self.k)
 
         return prediction
 
-    '''
-    Function:  calcuateDistance
-    Description: calcuate the distance between input vector and train data
-    Input:  input       dataType: ndarray   description: input vector
-            traind_ata  dataType: ndarray   description: data for training
-            train_label dataType: ndarray   description: labels of train data
-            k           dataType: int       description: select the first k distances
-    Output: prob        dataType: float     description: max probability of prediction 
-            label       dataType: int       description: prediction label of input vector
-    '''
-    def calcuateDistance(self, input, train_data, train_label, k):
-        train_num = train_data.shape[0]
-        # calcuate the distances
-        distances = np.tile(input, (train_num, 1)) - train_data
-        distances = distances**2
-        distances = distances.sum(axis=1)
-        distances = distances**0.5
+    # '''
+    # Function:  calcuateDistance
+    # Description: calcuate the distance between input vector and train data
+    # Input:  input       dataType: ndarray   description: input vector
+    #         traind_ata  dataType: ndarray   description: data for training
+    #         train_label dataType: ndarray   description: labels of train data
+    #         k           dataType: int       description: select the first k distances
+    # Output: prob        dataType: float     description: max probability of prediction 
+    #         label       dataType: int       description: prediction label of input vector
+    # '''
+    # def calcuateDistance(self, input, train_data, train_label, k):
+    #     train_num = train_data.shape[0]
+    #     # calcuate the distances
+    #     distances = np.tile(input, (train_num, 1)) - train_data
+    #     distances = distances**2
+    #     distances = distances.sum(axis=1)
+    #     distances = distances**0.5
 
-        # get the labels of the first k distances
-        disIndex = distances.argsort()
-        labelCount = {}
-        for i in range(k):
-            label = train_label[disIndex[i]]
-            labelCount[label] = labelCount.get(label, 0) + 1
+    #     # get the labels of the first k distances
+    #     disIndex = distances.argsort()
+    #     labelCount = {}
+    #     for i in range(k):
+    #         label = train_label[disIndex[i]]
+    #         labelCount[label] = labelCount.get(label, 0) + 1
 
-        prediction = sorted(labelCount.items(), key=op.itemgetter(1), reverse=True)
-        label = prediction[0][0]
-        prob = prediction[0][1]/k
-        return label, prob
+    #     prediction = sorted(labelCount.items(), key=op.itemgetter(1), reverse=True)
+    #     label = prediction[0][0]
+    #     prob = prediction[0][1]/k
+    #     return label, prob
 
     '''
     Function:  showDetectionResult
