@@ -10,21 +10,23 @@ import numpy as np
 import preProcess
 import pickle
 import random
+import AClassifier
 
-
-class LogisticRegressionClassifier:
+class LogisticRegressionClassifier(AClassifier.aClassifier):
     def __init__(self,norm_type="Normalization"):
         self.norm_type = norm_type
         self.weights = None
-        self.prediction = None
-        self.probability = None
+        # self.prediction = None
+        # self.probability = None
+        super().__init__()
+
     '''
-       Function:  sigmoid
-       Description: sigmoid function
-       Input:  x          dataType: ndarray   description: input vector
-               derivative dataType: bool      description: whether to calculate the derivative of sigmoid
-       Output: output     dataType: float     description: output
-       '''
+    Function:  sigmoid
+    Description: sigmoid function
+    Input:  x          dataType: ndarray   description: input vector
+            derivative dataType: bool      description: whether to calculate the derivative of sigmoid
+    Output: output     dataType: float     description: output
+    '''
     def sigmoid(self, x, derivative=False):
         output = 1/(1 + np.exp(-x))
         if derivative:
@@ -124,17 +126,17 @@ class LogisticRegressionClassifier:
         else:
             return prediction
 
-    '''
-    Function:  accuracy
-    Description: show detection result
-    Input:  test_label dataType: ndarray   description: labels of test data
-    Output: accuracy   dataType: float     description: detection accuarcy
-    '''
-    def accuarcy(self, test_label):
-        test_label = np.expand_dims(test_label, axis=1)
-        prediction = self.prediction
-        accuarcy = sum(prediction == test_label)/len(test_label)
-        return accuarcy
+    # '''
+    # Function:  accuracy
+    # Description: show detection result
+    # Input:  test_label dataType: ndarray   description: labels of test data
+    # Output: accuracy   dataType: float     description: detection accuarcy
+    # '''
+    # def accuarcy(self, test_label):
+    #     test_label = np.expand_dims(test_label, axis=1)
+    #     prediction = self.prediction
+    #     accuarcy = sum(prediction == test_label)/len(test_label)
+    #     return accuarcy
 
     '''
        Function:  save

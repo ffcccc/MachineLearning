@@ -6,9 +6,12 @@
 @ Description:    Implement HMM_TEST
 """
 
+import time,sys,os
+LIB = os.path.join(os.path.dirname(__file__), '..')
+DAT = os.path.join(os.path.dirname(__file__), '..', 'dataset', 'dataset3')
+sys.path.insert(0, LIB)
 from HMM import HiddenMarkovModel
 import numpy as np
-import time
 
 Q = np.array([0, 1]) # hot 0, cold 1
 V = np.array([0, 1, 2])

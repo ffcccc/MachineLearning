@@ -2,7 +2,8 @@ import time,sys,os
 # LIB is the parent directory of the directory where program resides.
 LIB = os.path.join(os.path.dirname(__file__), '..')
 DAT = os.path.join(os.path.dirname(__file__), '..', 'dataset', 'dataset3')
-sys.path.insert(0, LIB)from sklearn.linear_model import LogisticRegression
+sys.path.insert(0, LIB)
+from sklearn.linear_model import LogisticRegression
 from LogisticRegression import *
 import numpy as np
 import pandas as pd
@@ -19,7 +20,7 @@ time_start1 = time.time()
 clf1 = LogisticRegressionClassifier()
 clf1.train(trainData, trainLabel)
 clf1.predict(testData)
-score1 = clf1.accuarcy(testLabel)
+score1 = clf1.accuracy(testLabel)
 time_end1 = time.time()
 print("Accuracy of self-LogisticRegression: %f" % score1)
 print("Runtime of self-LogisticRegression:", time_end1-time_start1)

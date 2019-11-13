@@ -13,13 +13,16 @@
 @ Update Date:    2019-05-17
 @ Description:    Implement KMeans_TEST
 """
-
+import time,sys,os
+# LIB is the parent directory of the directory where program resides.
+LIB = os.path.join(os.path.dirname(__file__), '..')
+DAT = os.path.join(os.path.dirname(__file__), '..', 'dataset', 'dataset2')
+sys.path.insert(0, LIB)
 from Cluster import KMeans as kmeans
 from Cluster import DBSCAN as dbscan
 from sklearn.cluster import DBSCAN
 import numpy as np
 import pandas as pd
-import time
 import matplotlib.pyplot as plt
 from sklearn import datasets
 

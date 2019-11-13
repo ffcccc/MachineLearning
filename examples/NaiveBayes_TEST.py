@@ -15,8 +15,8 @@ from NaiveBayes import *
 import numpy as np
 import pandas as pd
 
-trainData = np.array(pd.read_table(os.path.join(DAT,'train.txt'), header=None, encoding='gb2312', delim_whitespace=True))
-testData = np.array(pd.read_table(os.path.join(DAT,'test.txt'), header=None, encoding='gb2312', delim_whitespace=True))
+trainData = pd.read_table(os.path.join(DAT,'train.txt'), header=None, encoding='gb2312', delim_whitespace=True)
+testData = pd.read_table(os.path.join(DAT,'test.txt'), header=None, encoding='gb2312', delim_whitespace=True)
 trainLabel = np.array(trainData.pop(3))
 trainData = np.array(trainData)
 testLabel = np.array(testData.pop(3))
@@ -26,7 +26,7 @@ time_start1 = time.time()
 clf1 = BayesClassifier()
 clf1.train(trainData, trainLabel)
 clf1.predict(testData)
-score1 = clf1.accuarcy(testLabel)
+score1 = clf1.accuracy(testLabel)
 time_end1 = time.time()
 print("Accuracy of self-Bayes: %f" % score1)
 print("Runtime of self-Bayes:", time_end1-time_start1)

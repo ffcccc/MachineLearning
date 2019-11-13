@@ -12,17 +12,17 @@ import numpy as np
 import preProcess
 import pickle
 import random
+import AClassifier
 
-
-class BlendingClassifier:
+class BlendingClassifier(AClassifier.aClassifier):
     def __init__(self, norm_type="Normalization", classifier_set=None):
         self.norm_type = norm_type
         self.classifier_set = classifier_set
         self.k = len(self.classifier_set)       # the number of classifiers
         self.layer1_classifier_set = None
         self.layer2_classifier = None
-        self.prediction = None
-        self.probability = None
+        # self.prediction = None
+        # self.probability = None
 
     '''
         Function:  train
@@ -91,18 +91,18 @@ class BlendingClassifier:
         else:
             return prediction
 
-    '''
-       Function:  accuracy
-       Description: show detection result
-       Input:  test_label dataType: ndarray   description: labels of test data
-       Output: accuracy   dataType: float     description: detection accuarcy
-       '''
+    # '''
+    #    Function:  accuracy
+    #    Description: show detection result
+    #    Input:  test_label dataType: ndarray   description: labels of test data
+    #    Output: accuracy   dataType: float     description: detection accuarcy
+    #    '''
 
-    def accuarcy(self, test_label):
-        test_label = np.expand_dims(test_label, axis=1)
-        prediction = self.prediction
-        accuarcy = sum(prediction == test_label) / len(test_label)
-        return accuarcy
+    # def accuarcy(self, test_label):
+    #     test_label = np.expand_dims(test_label, axis=1)
+    #     prediction = self.prediction
+    #     accuarcy = sum(prediction == test_label) / len(test_label)
+    #     return accuarcy
 
     '''
        Function:  save

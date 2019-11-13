@@ -5,11 +5,13 @@
 @ Update Date:    2019-05-31 
 @ Description:    Implement Apriori_TEST
 """
-
+import time,sys,os
+LIB = os.path.join(os.path.dirname(__file__), '..')
+DAT = os.path.join(os.path.dirname(__file__), '..', 'dataset', 'dataset3')
+sys.path.insert(0, LIB)
 from AssociationAnalysis import Apriori
 import numpy as np
 import pandas as pd
-import time
 
 trainData = [['bread', 'milk', 'vegetable', 'fruit', 'eggs'],
            ['noodle', 'beef', 'pork', 'water', 'socks', 'gloves', 'shoes', 'rice'],

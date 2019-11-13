@@ -10,13 +10,13 @@ import numpy as np
 import preProcess
 import pickle
 import random
+import AClassifier
 
-
-class SVMClassifier:
+class SVMClassifier(AClassifier.aClassifier):
     def __init__(self, norm_type="Normalization", C=200, kernel="rbf", threshold=10e-3, g=0.1, c=0, n=3, max_iteration=100):
         self.norm_type = norm_type
-        self.prediction = None
-        self.probability = None
+        # self.prediction = None
+        # self.probability = None
         self.train_data = None
         self.train_label = None
         self.sample_num = None
@@ -32,6 +32,7 @@ class SVMClassifier:
         self.g = g                                    # sigma for rbf, sigmoid poly
         self.n = n                                    # order of poly
         self.c = c                                    # bias of sigmoid poly
+        super().__init__()
 
 
     '''
@@ -330,17 +331,17 @@ class SVMClassifier:
         else:
             return prediction
 
-    '''
-    Function:  accuracy
-    Description: show detection result
-    Input:  test_label dataType: ndarray   description: labels of test data
-    Output: accuracy   dataType: float     description: detection accuarcy
-    '''
-    def accuarcy(self, test_label):
-        test_label = np.expand_dims(test_label, axis=1)
-        prediction = self.prediction
-        accuarcy = sum(prediction == test_label)/len(test_label)
-        return accuarcy
+    # '''
+    # Function:  accuracy
+    # Description: show detection result
+    # Input:  test_label dataType: ndarray   description: labels of test data
+    # Output: accuracy   dataType: float     description: detection accuarcy
+    # '''
+    # def accuarcy(self, test_label):
+    #     test_label = np.expand_dims(test_label, axis=1)
+    #     prediction = self.prediction
+    #     accuarcy = sum(prediction == test_label)/len(test_label)
+    #     return accuarcy
 
     '''
          Function:  save

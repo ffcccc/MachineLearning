@@ -22,7 +22,7 @@ class Regression:
         self.w = None
         self.parameters = None
         self.prediction = None
-        self.probability = None
+        # self.probability = None
 
     '''
        Function:  standardLinearRegression

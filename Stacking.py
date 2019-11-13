@@ -11,8 +11,9 @@ import numpy as np
 import preProcess
 import pickle
 import random
+import AClassifier
 
-class StackingClassifier:
+class StackingClassifier(AClassifier.aClassifier):
     def __init__(self, norm_type="Normalization", classifier_set=None, fusion_type="Weighing",n_folds=5):
         self.norm_type = norm_type
         self.classifier_set = classifier_set
@@ -20,8 +21,9 @@ class StackingClassifier:
         self.trained_classifier_set = None
         self.n_folds = n_folds                  # the number of fold for cross validation
         self.fusion_type = fusion_type          # fusion method in the second layer
-        self.prediction = None
-        self.probability = None
+        # self.prediction = None
+        # self.probability = None
+        super().__init__()
 
     '''
           Function:  train
@@ -105,18 +107,18 @@ class StackingClassifier:
         else:
             return prediction
 
-    '''
-         Function:  accuracy
-         Description: show detection result
-         Input:  test_label dataType: ndarray   description: labels of test data
-         Output: accuracy   dataType: float     description: detection accuarcy
-         '''
+    # '''
+    #      Function:  accuracy
+    #      Description: show detection result
+    #      Input:  test_label dataType: ndarray   description: labels of test data
+    #      Output: accuracy   dataType: float     description: detection accuarcy
+    #      '''
 
-    def accuarcy(self, test_label):
-        # test_label = np.expand_dims(test_label, axis=1)
-        prediction = self.prediction
-        accuarcy = sum(prediction == test_label) / len(test_label)
-        return accuarcy
+    # def accuarcy(self, test_label):
+    #     # test_label = np.expand_dims(test_label, axis=1)
+    #     prediction = self.prediction
+    #     accuarcy = sum(prediction == test_label) / len(test_label)
+    #     return accuarcy
 
     '''
        Function:  save

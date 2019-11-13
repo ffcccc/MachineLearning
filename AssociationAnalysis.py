@@ -415,7 +415,6 @@ class FPgrowth:
                 print(rule)
         return frequent_set, rules
 
-
 class Eclat:
     def __init__(self,min_support=3, min_confidence=0.6):
         self.min_support = min_support

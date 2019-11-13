@@ -11,9 +11,9 @@ import operator as op
 import preProcess
 import math
 import pickle
+import AClassifier
 
-
-class BayesClassifier:
+class BayesClassifier(AClassifier.aClassifier):
     def __init__(self, norm_type="Normalization", laplace=1):
         self.norm_type = norm_type
         self.laplace = laplace
@@ -22,8 +22,10 @@ class BayesClassifier:
         self.S = None
         self.prior_probability = None
         self.conditional_probability = None
-        self.prediction = None
-        self.probability = None
+        # self.prediction = None
+        # self.probability = None
+        super().__init__()
+
     '''
     Function:  train
     Description: train the model
@@ -133,18 +135,18 @@ class BayesClassifier:
             predict[self.label_value[m][0]] = temp
         return predict
 
-    '''
-    Function:  accuracy
-    Description: show detection result
-    Input:  test_data  dataType: ndarray   description: data for test
-            test_label dataType: ndarray   description: labels of test data
-    Output: accuracy   dataType: float     description: detection accuarcy
-    '''
-    def accuarcy(self, test_label):
-        test_label = np.expand_dims(test_label, axis=1)
-        prediction = self.prediction
-        accuarcy = sum(prediction == test_label)/len(test_label)
-        return accuarcy
+    # '''
+    # Function:  accuracy
+    # Description: show detection result
+    # Input:  test_data  dataType: ndarray   description: data for test
+    #         test_label dataType: ndarray   description: labels of test data
+    # Output: accuracy   dataType: float     description: detection accuarcy
+    # '''
+    # def accuarcy(self, test_label):
+    #     test_label = np.expand_dims(test_label, axis=1)
+    #     prediction = self.prediction
+    #     accuarcy = sum(prediction == test_label)/len(test_label)
+    #     return accuarcy
 
 
 

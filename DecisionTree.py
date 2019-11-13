@@ -11,7 +11,7 @@ import operator as op
 import preProcess
 import math
 import pickle
-
+import AClassifier
 
 class DecisionNode:
     def __init__(self, index=-1, value=None, results=None, right_tree=None, left_tree=None):
@@ -22,12 +22,13 @@ class DecisionNode:
         self.left_tree = left_tree
 
 
-class DecisionTreeClassifier:
+class DecisionTreeClassifier(AClassifier.aClassifier):
     def __init__(self, norm_type="Normalization", t=1e-5):
         self.norm_type = norm_type
         self.t = t                          # the threshold of information gain
-        self.prediction = None
-        self.probability = None
+        # self.prediction = None
+        # self.probability = None
+        super().__init__()
         self.tree_node = None
 
     '''
@@ -223,7 +224,8 @@ class DecisionTreeClassifier:
        Input:  sample      dataType: ndarray     description: input vector to be classified
        Output: label       dataType: ndarray     description: the prediction results of input
     '''
-    def classify(self, sample, tree):
+    @staticmethod
+    def classify(sample, tree):
         if tree.results != None:
             return tree.results
         else:
@@ -233,7 +235,7 @@ class DecisionTreeClassifier:
                 branch = tree.right_tree
             else:
                 branch = tree.left_tree
-            return self.classify(sample, branch)
+            return DecisionTreeClassifier.classify(sample, branch)
 
     '''
        Function:  printTree
@@ -258,11 +260,11 @@ class DecisionTreeClassifier:
             test_label dataType: ndarray   description: labels of test data
     Output: accuracy   dataType: float     description: detection accuarcy
     '''
-    def accuarcy(self, test_label):
-        test_label = np.expand_dims(test_label, axis=1)
-        prediction = self.prediction
-        accuarcy = sum(prediction == test_label)/len(test_label)
-        return accuarcy
+    # def accuarcy(self, test_label):
+    #     test_label = np.expand_dims(test_label, axis=1)
+    #     prediction = self.prediction
+    #     accuarcy = sum(prediction == test_label)/len(test_label)
+    #     return accuarcy
 
 
 

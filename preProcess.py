@@ -63,22 +63,35 @@ Input:  input       dataType: ndarray   description: input vector
 Output: prob        dataType: float     description: max probability of prediction 
         label       dataType: int       description: prediction label of input vector
 '''
-def calcuateDistance(input, train_data, train_label, k):
-    train_num = train_data.shape[0]
-    # calcuate the distances
-    distances = np.tile(input, (train_num, 1)) - train_data
-    distances = distances**2
-    distances = distances.sum(axis=1)
-    distances = distances**0.5
+# def calculateDistance(input, train_data, train_label, k):
+#     train_num = train_data.shape[0]
+#     # calcuate the distances
+#     distances = np.tile(input, (train_num, 1)) - train_data
+#     distances = distances**2
+#     distances = distances.sum(axis=1)
+#     distances = distances**0.5
 
-    # get the labels of the first k distances
-    disIndex = distances.argsort()
-    labelCount = {}
-    for i in range(k):
-        label = train_label[disIndex[i]]
-        labelCount[label] = labelCount.get(label, 0) + 1
+#     # get the labels of the first k distances
+#     disIndex = distances.argsort()
+#     labelCount = {}
+#     for i in range(k):
+#         label = train_label[disIndex[i]]
+#         labelCount[label] = labelCount.get(label, 0) + 1
 
-    prediction = sorted(labelCount.items(), key=op.itemgetter(1), reverse=True)
-    label = prediction[0][0]
-    prob = prediction[0][1]/k
-    return label, prob
+#     prediction = sorted(labelCount.items(), key=op.itemgetter(1), reverse=True)
+#     label = prediction[0][0]
+#     prob = prediction[0][1]/k
+#     return label, prob
+
+'''
+Function:  calculateAccuracy
+Description: show detection result
+Input:  test_data  dataType: ndarray   description: data for test
+        test_label dataType: ndarray   description: labels of test data
+Output: accuracy   dataType: float     description: detection accuarcy
+'''
+def calculateAccuracy(test_label, prediction):
+    test_label = np.expand_dims(test_label, axis=1)
+    # prediction = self.prediction
+    accuracy = sum(prediction == test_label)/len(test_label)
+    return accuracy

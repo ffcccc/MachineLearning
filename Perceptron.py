@@ -10,8 +10,9 @@ import numpy as np
 import preProcess
 import pickle
 import random
+import AClassifier
 
-class  PerceptronClassifier:
+class  PerceptronClassifier(AClassifier.aClassifier):
     def __init__(self, norm_type="Normalization", iterations=500, learning_rate=0.01):
         self.norm_type = norm_type
         self.iterations = iterations
@@ -20,8 +21,9 @@ class  PerceptronClassifier:
         self.loss = None
         self.w = None
         self.b = None
-        self.prediction = None
-        self.probability = None
+        # self.prediction = None
+        # self.probability = None
+        super().__init__()
 
     '''
        Function:  sigmoid
@@ -138,17 +140,17 @@ class  PerceptronClassifier:
             return prediction
 
 
-    '''
-    Function:  accuracy
-    Description: show detection result
-    Input:  test_label dataType: ndarray   description: labels of test data
-    Output: accuracy   dataType: float     description: detection accuarcy
-    '''
-    def accuarcy(self, test_label):
-        test_label = np.expand_dims(test_label, axis=1)
-        prediction = self.prediction
-        accuarcy = sum(prediction == test_label)/len(test_label)
-        return accuarcy
+    # '''
+    # Function:  accuracy
+    # Description: show detection result
+    # Input:  test_label dataType: ndarray   description: labels of test data
+    # Output: accuracy   dataType: float     description: detection accuarcy
+    # '''
+    # def accuarcy(self, test_label):
+    #     test_label = np.expand_dims(test_label, axis=1)
+    #     prediction = self.prediction
+    #     accuarcy = sum(prediction == test_label)/len(test_label)
+    #     return accuarcy
 
     '''
        Function:  save

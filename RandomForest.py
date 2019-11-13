@@ -8,16 +8,18 @@
 import numpy as np
 import operator as op
 import pickle
+import AClassifier
 from DecisionTree import DecisionTreeClassifier
-from TreeRegression import RegressionTree
+from TreeRegression import treeRegression
 
-class RandomForestClassifier:
+class RandomForestClassifier(AClassifier.aClassifier):
     def __init__(self, tree_num=10, alpha=1e-5):
         self.tree_num = tree_num
         self.alpha=alpha
         self.trees = []
-        self.prediction = None
-        self.probability = None
+        # self.prediction = None
+        # self.probability = None
+        super().__init__()
 
     '''
         Function:  boostrap
@@ -82,17 +84,17 @@ class RandomForestClassifier:
         self.prediction = prediction
         return prediction
 
-    '''
-    Function:  showDetectionResult
-    Description: show detection result
-    Input:  test_data  dataType: ndarray   description: data for test
-            test_label dataType: ndarray   description: labels of test data
-    Output: accuracy   dataType: float     description: detection accuarcy
-    '''
-    def accuarcy(self, test_label):
-        prediction = self.prediction
-        accuarcy = sum(prediction == test_label)/len(test_label)
-        return accuarcy
+    # '''
+    # Function:  showDetectionResult
+    # Description: show detection result
+    # Input:  test_data  dataType: ndarray   description: data for test
+    #         test_label dataType: ndarray   description: labels of test data
+    # Output: accuracy   dataType: float     description: detection accuarcy
+    # '''
+    # def accuarcy(self, test_label):
+    #     prediction = self.prediction
+    #     accuarcy = sum(prediction == test_label)/len(test_label)
+    #     return accuarcy
 
     '''
          Function:  save
@@ -139,7 +141,7 @@ class RandomForestRegression:
         index = np.random.randint(0, self.sample_num, (self.sample_num))
         x = train_data[index]
         y = train_label[index]
-        clf = RegressionTree(error_threshold=1,  N=4, alpha=0.01)
+        clf = treeRegression(error_threshold=1,  N=4, alpha=0.01)
         clf.train(x, y)
         return clf
 

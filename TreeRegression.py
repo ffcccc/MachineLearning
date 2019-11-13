@@ -11,6 +11,7 @@ import operator as op
 import preProcess
 import math
 import pickle
+import AClassifier
 
 class treeNode():
     def __init__(self, index=-1, value=None, result=None, right_tree=None, left_tree=None):
@@ -21,15 +22,16 @@ class treeNode():
         self.left_tree = left_tree
 
 
-class treeRegression:
+class treeRegression(AClassifier.aClassifier):
     def __init__(self, norm_type="Normalization",iterations=100, error_threshold=1, N=4):
         self.norm_type = norm_type
         self.iterations = iterations
         self.error_threshold = error_threshold  # the threshold of error
         self.N = N                              # the least number of sample for split
         self.tree_node = None
-        self.prediction = None
-        self.probability = None
+        # self.prediction = None
+        # self.probability = None
+        super().__init__()
 
     '''
     Function:  divideData
@@ -209,12 +211,6 @@ class treeRegression:
     def pruning(self, tree, data, alpha):
 
         return 0
-
-
-
-
-
-
 
     '''
       Function:  save
