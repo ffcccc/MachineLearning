@@ -12,6 +12,7 @@ import pickle
 import random
 import matplotlib.pyplot as plt
 import operator as op
+from cpp import distance as cdist
 
 class KMeans:
     def __init__(self, norm_type="Normalization", k=4, distance_type="Euclidean", cluster_type="KMeans++"):
@@ -76,7 +77,19 @@ class KMeans:
             d = np.zeros([sample_num, len(centers)])
             for i in range(len(centers)):
                 # calculate the distance between each sample and each cluster center
+<<<<<<< Updated upstream
                 d[:, i] = self.calculateDistance(train_data, centers[i])
+=======
+                # d[:, i] = self.calculateDistance(train_data, centers[i])
+                bb = preProcess.calculateDistance(self.distance_type, train_data, centers[i])
+                d[:, i] = bb
+                # for j in range(sample_num):
+                #     aa = cdist.distEuclidean(train_data[j, :], centers[i])
+                #     d[j, i] = aa
+                for j in range(sample_num):
+                    aa = preProcess.calculateDistance(self.distance_type, train_data[j,:], centers[i])
+                    d[j, i] = aa
+>>>>>>> Stashed changes
 
             # find the minimum distance between each sample and each cluster center
             old_label = distances[:, 0].copy()
@@ -212,7 +225,7 @@ class KMeans:
     Output: centers         dataType: ndarray   description: cluster centers
             distances       dataType: ndarray   description: distance between sample and its corresponding cluster(cluster, distance)
     '''
-    def train(self, train_data, display="True"):
+    def train(self, train_data, display=True):
         if self.norm_type == "Standardization":
             train_data = preProcess.Standardization(train_data)
         else:

@@ -1,0 +1,19 @@
+{
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "files.associations": {
+        "memory": "cpp",
+        "ostream": "cpp",
+        "system_error": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp",
+        "utility": "cpp",
+        "vector": "cpp",
+        "xmemory0": "cpp",
+        "xstring": "cpp",
+        "xtr1common": "cpp",
+        "xutility": "cpp"
+    },
+    "python.pythonPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\Anaconda2_64\\envs\\base (R + Py_3.6)\\python.exe",
+    "cmake.configureOnOpen": false
+}

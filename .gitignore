@@ -1,1 +1,17 @@
+<<<<<<< Updated upstream
 .idea/
+=======
+__pycache__
+/cpp/eigen3
+*.pyd
+/build
+/cpp.egg-info
+.vs/MachineLearningFork/v16/.suo
+.vs/ProjectSettings.json
+.vs/MachineLearningFork/v16/Browse.VC.db
+.vs/CMake Overview
+.vs/PythonSettings.json
+.vs/slnx.sqlite
+>>>>>>> Stashed changes
+.vs/VSWorkspaceState.json
+.vs/VSWorkspaceState.json

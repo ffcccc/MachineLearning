@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 """
 @ Filename:       AadBoost_TEST.py
 @ Author:         Ryuk
@@ -5,6 +6,15 @@
 @ Update Date:    2019-05-31
 @ Description:    Implement AdaBoost_TEST
 """
+=======
+import numpy as np
+import pandas as pd
+import time,sys,os 
+# LIB is the parent directory of the directory where program resides.
+LIB = os.path.join(os.path.dirname(__file__), '..')
+DAT = os.path.join(os.path.dirname(__file__), '..', 'dataset', 'dataset2')
+sys.path.insert(0, LIB)
+>>>>>>> Stashed changes
 from AdaBoost import *
 from SVM import *
 import numpy as np
